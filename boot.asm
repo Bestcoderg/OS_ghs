@@ -24,16 +24,16 @@ DB   "MYFIRSTOS  "
 DB   "FAT12   "
 times  18  DB 0
 
-entry:
-    mov  ax, 0
+entry:                ;初始化寄存器
+    mov  ax, 0          
     mov  ss, ax
     mov  sp, 0x7c00
     mov  ds, ax
     mov  es, ax
 
-readfloppy:
+readfloppy:           ;读盘准备
     ;mov  ax, 1000h   ;将数据读到内存0x0820之后，以免覆盖当前内容
-    mov  bx, 0x8200
+    mov  bx, 0x8200   ;这里和 ex=0x0820 效果一样，地址为 (es<<4)+bx
     mov  ch, 0        ;CH 用来存储柱面号
     mov  dh, 0        ;DH 用来存储磁头号
     mov  cl, 2        ;CL 用来存储扇区号
@@ -57,10 +57,11 @@ retry:
 
 next:
     mov  ax, bx
-    add  ax, 0x0200
+    add  ax, 0x0200  
     mov  bx, ax        ;地址后移512byte
     add  cl, 1
     cmp  cl ,18
+    ;jbe retry          ;这里应该是要这句话的呀！！！
 
 goto_PM:
     mov  al, 0x13
@@ -68,7 +69,7 @@ goto_PM:
     int  0x10
 
     mov  al, 0xff
-    out 0x21, al
+    out 0x21, al  ;pic0的端口
     nop
     out 0xa1, al
 
@@ -81,6 +82,7 @@ goto_PM:
     mov  al, 0xdf
     out  0x60, al
     call  waitkbd_8042
+    
 
     cli
     xor  ax, ax
