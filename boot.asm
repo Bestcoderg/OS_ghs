@@ -83,7 +83,11 @@ goto_PM:
 
     cli             ;禁止可屏蔽中断
 
+<<<<<<< HEAD
     ;开启A20管脚，即进入保护模式
+=======
+    ;通过键盘控制器打开A20
+>>>>>>> 4fa7480a4c8ea3f2ebc85702bc5dad9414f60086
     call  waitkbd_8042
     mov  al, 0xd1
     out  0x64, al
@@ -99,9 +103,13 @@ goto_PM:
     ;所以移动到0x0地址以后，需要重新计算GDTR0存储的地址
     ;https://blog.csdn.net/u013982161/article/details/52138155 详解lgdt
     lgdt  [gdt_desc]
+<<<<<<< HEAD
 
 
     ; 打开地址线A20
+=======
+    ;对于较新的机器，也可以通过此方法开启A20
+>>>>>>> 4fa7480a4c8ea3f2ebc85702bc5dad9414f60086
     in  al, 92h
     or  al, 0x02
     out  92h, al
