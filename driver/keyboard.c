@@ -41,7 +41,7 @@ void keyboard_handler(pt_regs *regs)
 
 }
 
-void keyboard_read()
+void keyboard_read(int x,int y)
 {
 	unsigned char scancode;
     io_cli();
@@ -55,7 +55,9 @@ void keyboard_read()
 		}
 		kb_in.count = kb_in.count - 2;
 		boxfill8((unsigned char *) 0xa0000, 320, COL8_848484, 8, 24, 321, 40); //clean last char
-        showString((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, "key pressed");
+        //showString((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, "keyboard!!!");
+
+       showFont8((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, systemFont+  keymap[scancode*3] * 16);
 	}
     io_sti();
 }
