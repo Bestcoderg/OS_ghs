@@ -1,10 +1,10 @@
 ##################################################
 #		 Makefile
 ##################################################
-BOOT:=boot.asm
+BOOT:=boot/boot.asm
 BOOT_BIN:=$(subst .asm,.bin,$(BOOT))
 BOOT_LST:=$(subst .asm,.lst,$(BOOT))
-KERNEL:=kernel.asm
+KERNEL:=kernel/kernel.asm
 KERNEL_BIN:=$(subst .asm,.bin,$(KERNEL))
 KERNEL_ELF:=$(subst .asm,.elf,$(KERNEL))
 KERNEL_OBJECT:=$(subst .asm,.o,$(KERNEL))
@@ -16,9 +16,9 @@ CC = gcc
 LD = ld
 OBJCOPY = objcopy
 
-C_FLAGS   = -c -Wall -m32 -ggdb -gstabs+ -nostdinc -fno-builtin -fno-stack-protector
+C_FLAGS   = -c -Wall -m32 -nostdinc -fno-builtin -fno-stack-protector -I include
 LD_FLAGS  = -T kernel.ld -m elf_i386
-ASM_FLAGS = -felf -g -F stabs
+ASM_FLAGS = -felf
 
 IMG:=system.img
 
@@ -33,7 +33,8 @@ $(BOOT_BIN) : $(BOOT)
 $(KERNEL_OBJECT) : $(KERNEL)
 	$(ASM) $(ASM_FLAGS) $< -o $@
 
-$(C_OBJECTS) : $(C_SOURCES)
+.c.o :
+	@echo $(C_SOURCES)
 	$(CC) $(C_FLAGS) $< -o $@
 
 link :
@@ -54,7 +55,8 @@ debug:
 	qemu-system-x86_64 -d guest_errors -boot order=a -fda $(IMG)
 .PHONY:clean
 clean :
-	rm -f $(BOOT_BIN) $(KERNEL_BIN) $(KERNEL_ELF) $(KERNEL_OBJECT) $(S_OBJECTS) $(C_OBJECTS) $(IMG) *.txt *.lst
+	rm -f $(BOOT_BIN) $(KERNEL_BIN) $(KERNEL_ELF) $(KERNEL_OBJECT) $(S_OBJECTS) \
+	 $(C_OBJECTS) $(IMG) boot/boot.txt kernel/kernel.txt
 dis:
-	ndisasm ./boot.bin > ./boot.txt
-	objdump -d -M intel ./kernel.elf > ./kernel.txt
+	ndisasm ./boot/boot.bin > ./boot/boot.txt
+	objdump -d -M intel ./kernel/kernel.elf > ./kernel/kernel.txt
