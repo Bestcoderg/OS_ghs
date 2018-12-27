@@ -1,5 +1,5 @@
 #include "stdio.h"
-
+#include "video.h"
 /*
  * Simply clears the screen to ' '
  */
@@ -23,7 +23,7 @@ void clear_screen()
 void print(char *msg, unsigned int line)
 {
 	char *vidmem = (char *)0xB8000;
-    unsigned int i = line*80*2, color = WHITE_TXT;
+    unsigned int i = line*80*2, color = COL8_00FF00;
 
 		
 	
@@ -39,7 +39,7 @@ void print(char *msg, unsigned int line)
 
 char *itoa(int number)
 {
-	char str[5];
+	char str[10];
 	int i = 0;
 	while(number > 10)
 	{
@@ -47,5 +47,5 @@ char *itoa(int number)
 		number = number/10;
 		i++;
 	}
-	return &str;
+	return str;
 }

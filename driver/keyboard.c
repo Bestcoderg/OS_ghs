@@ -6,7 +6,8 @@
 #include <interrupt.h>
 #include <keymap.h>
 #include <video.h>
-
+#include "printk.h"
+extern int x,y;
 /*
  * 说明：注册键盘中断处理函数
  */
@@ -41,7 +42,7 @@ void keyboard_handler(pt_regs *regs)
 
 }
 
-void keyboard_read(int x,int y)
+void keyboard_read()
 {
 	unsigned char scancode;
     io_cli();
@@ -54,10 +55,16 @@ void keyboard_read(int x,int y)
 			kb_in.p_tail = kb_in.buf;
 		}
 		kb_in.count = kb_in.count - 2;
-		boxfill8((unsigned char *) 0xa0000, 320, COL8_848484, 8, 24, 321, 40); //clean last char
-        //showString((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, "keyboard!!!");
+		//boxfill8((unsigned char *) 0xa0000, 320, COL8_848484, 8, 24, 319, 40); //clean last char
+		showString((unsigned char *) 0xa0000, 320, 0 , 8, COL8_000084, "Welcome to my OS");
+		showFont8((unsigned char *) 0xa0000, 320, x, y, COL8_FFFFFF, systemFont+  keymap[scancode*3] * 16);
+		x+=8;
+		//showFont8((unsigned char *) 0xa0000, 320, 8, 40, COL8_FFFFFF,systemFont + (unsigned int)(num+'a')*16 );
 
-       showFont8((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, systemFont+  keymap[scancode*3] * 16);
+		//printk("%c",keymap[scancode*3]);
+		//print("key pressed", 0);
+		//output a char
+		
 	}
     io_sti();
 }
