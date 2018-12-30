@@ -25,6 +25,7 @@ DB   "FAT12   "
 times  18  DB 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 VBEMODE	EQU		0x103			;800 x  600 x 8bit 彩色
 
 ; BOOT_INFO 相关
@@ -33,6 +34,8 @@ SCRNX	EQU		0x0ff4			; 分辨率X
 SCRNY	EQU		0x0ff6			; 分辨率Y
 VRAM	EQU		0x0ff8			; 图像缓冲区的起始地址
 
+=======
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 =======
 >>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 entry:
@@ -81,6 +84,7 @@ next:
     add  ch, 1
     cmp  ch, CYLS
     jb   readloop
+<<<<<<< HEAD
 <<<<<<< HEAD
     mov  [0x0ff0],ch	;保存读取的扇区数
 
@@ -137,12 +141,17 @@ scrn320:
 
 keystatus:
 =======
+=======
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 
 goto_PM:
     mov  al, 0x13
     mov  ah, 0x00
     int  0x10
 
+<<<<<<< HEAD
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
+=======
 >>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
     mov  al, 0xff
     out 0x21, al

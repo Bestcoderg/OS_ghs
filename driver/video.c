@@ -84,6 +84,7 @@ void showString(unsigned char* vram, int xsize, int x, int y, char color, unsign
        x += 8;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 
@@ -96,6 +97,9 @@ void init_screen8(char *vram, int x, int y)
 
 	return;
 }
+=======
+}
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 =======
 }
 >>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
