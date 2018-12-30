@@ -4,31 +4,27 @@
 #include <keymap.h>
 
 unsigned char *vram;/* 声明变量vram、用于BYTE [...]地址 */
-int x,y;
+int x,y; //鼠标的坐标
 void main(void)
 {
 	struct BOOTINFO *binfo = (struct BOOTINFO*) 0x0ff0;
 	clear_screen();
 	int xsize, ysize;
 	char mcursor[256];
-	vram = (unsigned char *) 0xa0000;/* 地址变量赋值 */
-	xsize = 320;
-	ysize = 200;
 
 	init_gdt();
 	init_idt();
 
 	init_palette();/* 设定调色板 */
-
 	init_keyboard();
-	/* 根据 0xa0000 + x + y * 320 计算坐标 8*/
+	init_mouse();
 	
+	/* 加载背景色 */
 	init_screen8(binfo->vram, binfo->scrnx, binfo->scrny);
 
 	init_mouse_cursor(mcursor, COL8_848484);
 	putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
 	
-	init_mouse();
 	//x,y代表当前输出字符的位置
 	x = 8;
 	y = 24;
