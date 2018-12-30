@@ -28,7 +28,7 @@ void main(void)
 	putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
 	
 	init_mouse();
-
+	//!!!!
 	//x,y代表当前输出字符的位置
 	x = 8;
 	y = 24;
