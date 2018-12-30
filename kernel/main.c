@@ -4,8 +4,8 @@
 #include <keymap.h>
 #include "mouse.h"
 #include "sheet.h"
-int x,y; //鼠标的坐标
-int mx,my;
+int x,y; //输入的字符的位置的坐标
+int mx,my; //鼠标的位置
 void main(void)
 {
 	struct BOOTINFO *binfo = (struct BOOTINFO*) 0x0ff0;
@@ -65,6 +65,7 @@ void main(void)
 				if(y>100) y =32;
 			}
 			showFont8(binfo->vram, binfo->scrnx, x, y, COL8_FFFFFF, systemFont+  keymap[scode*3] * 16);
+			//showFont8(buf_back, binfo->scrnx, x, y, COL8_FFFFFF, systemFont+  keymap[scode*3] * 16);
 			x+=8;
 		}
 		i = mouse_read();
