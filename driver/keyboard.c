@@ -4,14 +4,6 @@
 
 #include <keyboard.h>
 #include <interrupt.h>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-#include <keymap.h>
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-=======
-#include <keymap.h>
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 #include <video.h>
 #include "printk.h"
 extern int x,y;
@@ -49,15 +41,7 @@ void keyboard_handler(pt_regs *regs)
 
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 int keyboard_read()
-=======
-void keyboard_read()
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-=======
-void keyboard_read()
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 {
 	unsigned char scancode;
     io_cli();
@@ -70,30 +54,9 @@ void keyboard_read()
 			kb_in.p_tail = kb_in.buf;
 		}
 		kb_in.count = kb_in.count - 2;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		io_sti();
 		return scancode;
 	}
     io_sti();
 	return -1;
-=======
-=======
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-		//boxfill8((unsigned char *) 0xa0000, 320, COL8_848484, 8, 24, 319, 40); //clean last char
-		showString((unsigned char *) 0xa0000, 320, 0 , 8, COL8_000084, "Welcome to my OS");
-		showFont8((unsigned char *) 0xa0000, 320, x, y, COL8_FFFFFF, systemFont+  keymap[scancode*3] * 16);
-		x+=8;
-		//showFont8((unsigned char *) 0xa0000, 320, 8, 40, COL8_FFFFFF,systemFont + (unsigned int)(num+'a')*16 );
-
-		//printk("%c",keymap[scancode*3]);
-		//print("key pressed", 0);
-		//output a char
-		
-	}
-    io_sti();
-<<<<<<< HEAD
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-=======
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 }

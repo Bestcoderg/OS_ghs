@@ -1,8 +1,6 @@
 /*汇编io调用*/
 #ifndef IO_H
 #define IO_H
-<<<<<<< HEAD
-<<<<<<< HEAD
 struct BOOTINFO { /* 0x0ff0-0x0fff */
 	char cyls; /* 启动区读磁盘读到此为止 */
 	char leds; /* 启动时键盘的LED的状态 */
@@ -15,10 +13,6 @@ struct FIFO8 {
 	unsigned char *buf;
 	int p, q, size, free, flags;
 };
-=======
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-=======
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 void io_hlt(void);
 void io_cli(void);
 void io_sti(void);
@@ -26,8 +20,6 @@ void io_out8(int port, int data);
 int io_in8(int port);
 int io_load_eflags(void);
 void io_store_eflags(int eflags);
-<<<<<<< HEAD
-<<<<<<< HEAD
 void load_gdtr(unsigned int *);
 void load_idtr(unsigned int *);
 int load_cr0(void);
@@ -38,13 +30,3 @@ int fifo8_put(struct FIFO8 *fifo, unsigned char data);
 int fifo8_get(struct FIFO8 *fifo);
 int fifo8_status(struct FIFO8 *fifo);
 #endif //KERNEL_Hs
-=======
-load_gdtr(unsigned int *);
-load_idtr(unsigned int *);
-#endif //KERNEL_H
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
-=======
-load_gdtr(unsigned int *);
-load_idtr(unsigned int *);
-#endif //KERNEL_H
->>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
