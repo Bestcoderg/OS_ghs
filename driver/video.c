@@ -83,6 +83,7 @@ void showString(unsigned char* vram, int xsize, int x, int y, char color, unsign
        showFont8(vram, xsize, x, y,color, systemFont+ *s * 16);
        x += 8;
     }
+<<<<<<< HEAD
 }
 
 
@@ -95,3 +96,6 @@ void init_screen8(char *vram, int x, int y)
 
 	return;
 }
+=======
+}
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f

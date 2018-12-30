@@ -5,7 +5,11 @@
 
 void keyboard_handler(pt_regs *regs);
 void init_keyboard();
+<<<<<<< HEAD
 int keyboard_read();
+=======
+void keyboard_read();
+>>>>>>> 3567a07e740acdba4cf5b084e2d8cfd6c2f2df4f
 
 /************************************************************************/
 /*                          Macros Declaration                          */
