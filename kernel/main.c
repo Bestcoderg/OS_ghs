@@ -2,6 +2,7 @@
 #include <interrupt.h>
 #include <video.h>
 #include <keymap.h>
+
 unsigned char *vram;/* 声明变量vram、用于BYTE [...]地址 */
 int x,y;
 void main(void)
