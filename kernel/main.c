@@ -1,11 +1,12 @@
 #include <descriptor.h>
 #include <interrupt.h>
 #include <video.h>
-
+#include <keymap.h>
 unsigned char *vram;/* 声明变量vram、用于BYTE [...]地址 */
 int x,y;
 void main(void)
 {
+	struct BOOTINFO *binfo = (struct BOOTINFO*) 0x0ff0;
 	clear_screen();
 	int xsize, ysize;
 	char mcursor[256];
@@ -21,11 +22,7 @@ void main(void)
 	init_keyboard();
 	/* 根据 0xa0000 + x + y * 320 计算坐标 8*/
 	
-	boxfill8(vram, xsize, COL8_848484,  0,         0,          xsize -  1, ysize - 21);
-	boxfill8(vram, xsize, COL8_C6C6C6,  0,         ysize - 20, xsize -  1, ysize - 19);
-	boxfill8(vram, xsize, COL8_FFFFFF,  0,         ysize - 19, xsize -  1, ysize - 18);
-	boxfill8(vram, xsize, COL8_C6C6C6,  0,         ysize - 18, xsize -  1, ysize -  1);
-	
+	init_screen8(binfo->vram, binfo->scrnx, binfo->scrny);
 
 	init_mouse_cursor(mcursor, COL8_848484);
 	putblock(vram, xsize, 16, 16, 80, 80, mcursor, 16);
@@ -40,16 +37,19 @@ void main(void)
 	//showString((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, "Welcome");
 	for (;;) {
 		//io_hlt();
+		showString(binfo->vram,binfo->scrnx , 0 , 8, COL8_000084, "Welcome to my OS");
 
-		//if(x>300) x = 32;
-
-		if(x >= 320){
-			x = 8;
-			y += 16;
-			if(y>100) y =32;
+				
+		int scode = keyboard_read();
+		if (scode != -1) {
+			if(x >= 320){
+				x = 8;
+				y += 16;
+				if(y>100) y =32;
+			}
+			showFont8(binfo->vram, binfo->scrnx, x, y, COL8_FFFFFF, systemFont+  keymap[scode*3] * 16);
+			x+=8;
 		}
-		
-		keyboard_read();
 		
 		//mouse_read();
 	}
