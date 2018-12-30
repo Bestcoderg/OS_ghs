@@ -31,6 +31,7 @@ void main(void)
 	//!!!!
 	//x,y代表当前输出字符的位置
 	x = 8;
+	x = 16;
 	y = 24;
 	int ti = 0;
 	for (;;) {
