@@ -33,13 +33,8 @@ void main(void)
 	x = 8;
 	y = 24;
 	int ti = 0;
-	//asm volatile("int $44");
-	//showString((unsigned char *) 0xa0000, 320, 8, 24, COL8_FFFFFF, "Welcome");
 	for (;;) {
-		//io_hlt();
-		showString(binfo->vram,binfo->scrnx , 0 , 8, COL8_000084, "Welcome to my OS");
-
-				
+		showString(binfo->vram,binfo->scrnx , 0 , 8, COL8_000084, "Welcome to my OS");	
 		int scode = keyboard_read();
 		if (scode != -1) {
 			if(x >= 320){
