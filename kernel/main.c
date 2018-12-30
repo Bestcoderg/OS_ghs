@@ -28,8 +28,8 @@ void main(void)
 	init_mouse_cursor(mcursor, COL8_848484);
 	mx = (binfo->scrnx - 16) / 2;
     my = (binfo->scrny - 28 - 16) / 2;  
-	//putblock(binfo->vram, binfo->scrnx, 16, 16, 80, 80, mcursor, 16);
-	
+	putblock(binfo->vram, binfo->scrnx, 16, 16, mx, my, mcursor, 16); /* 描画鼠标 */
+				
 	//x,y代表当前输出字符的位置
 	x = 8;
 	y = 24;
@@ -61,6 +61,7 @@ void main(void)
 					s[2] = 'C';
 				}
 				/* 鼠标指针的移动 */
+				boxfill8(binfo->vram, binfo->scrnx, COL8_848484, mx, my, mx + 15, my + 15); /* 隐藏鼠标 */
 				mx += mdec.x;
 				my += mdec.y;
 				if (mx < 0) {
@@ -75,7 +76,7 @@ void main(void)
 				if (my > binfo->scrny - 16) {
 					my = binfo->scrny - 16;
 				}
-				putblock(binfo->vram, binfo->scrnx, 16, 16, mx, my, mcursor, 16);
+				putblock(binfo->vram, binfo->scrnx, 16, 16, mx, my, mcursor, 16); /* 描画鼠标 */
 				//sheet_slide(shtctl, sht_mouse, mx, my); /* 包含sheet_refresh含sheet_refresh */
 			}
 		}
